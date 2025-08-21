@@ -1,7 +1,8 @@
 {
     "IsEncrypted": false,
-    "Values": {
-        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
-    }
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "EventHubConnectionString": "Endpoint=sb://roberteventhubs.servicebus.windows.net/;SharedAccessKeyName=TestPolicy;SharedAccessKey=OimxuJhBviIvBs/WBUPg6C3iIHB5F2+UI+AEhLbAhIA=;EntityPath=roberteventhub"
+  }
 }
