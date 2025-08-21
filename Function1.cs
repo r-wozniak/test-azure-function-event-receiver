@@ -15,7 +15,7 @@ public class Function1
     }
 
     [Function(nameof(Function1))]
-    public void Run([EventHubTrigger("roberteventhub1", Connection = "Endpoint=sb://roberteventhub.servicebus.windows.net/;SharedAccessKeyName=TestPolicy;SharedAccessKey=Dnco7aZscO9EwITfdVjwQ3WpHYm6wChHy+AEhPUWwnE=;EntityPath=roberteventhub1")] EventData[] events)
+    public void Run([EventHubTrigger("", Connection = "Endpoint=sb://roberteventhub.servicebus.windows.net/;SharedAccessKeyName=TestPolicy;SharedAccessKey=Dnco7aZscO9EwITfdVjwQ3WpHYm6wChHy+AEhPUWwnE=;EntityPath=roberteventhub1")] EventData[] events)
     {
         _logger.LogInformation($"Event Body: {events.Count()}");
         foreach (EventData @event in events)
