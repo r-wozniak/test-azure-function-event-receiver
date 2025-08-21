@@ -15,7 +15,7 @@ public class Function1
     }
 
     [Function(nameof(Function1))]
-    public void Run([EventHubTrigger("roberteventhub1")] EventData[] events)
+    public void Run([EventHubTrigger("")] EventData[] events)
     {
         _logger.LogInformation($"Event Body: {events.Count()}");
         foreach (EventData @event in events)
