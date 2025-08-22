@@ -19,14 +19,15 @@ public class Function1
     public void Run([EventHubTrigger("roberteventhub", Connection = "EventHubConnectionString")] EventData[] events)
     {
         _logger.LogInformation($"Event Body: {events.Count()}");
-        foreach (EventData @event in events)
+        if (events.Count() > 0)
+        {
+            var data = Encoding.UTF8.GetString(events[0].Data);
+            _logger.LogInformation($"First event in batch: {data} Time: {DateTime.Now}");
+        }
+/*        foreach (EventData @event in events)
         {
             var data1= Encoding.UTF8.GetString(@event.Data);
-            var data2 = @event.Body.ToString();
-            _logger.LogInformation($"Event Body1: {data1}");
-            _logger.LogInformation($"Event Body2: {data2}");
-            _logger.LogInformation("Event Content-Type: {contentType}", @event.ContentType);
-        }
-        _logger.LogInformation($"Time: {DateTime.Now}");
+            _logger.LogInformation($"First event in batch: {data1} Time: {DateTime.Now}");
+        }*/
     }
 }
