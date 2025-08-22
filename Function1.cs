@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Azure.Messaging.EventHubs;
 using Microsoft.Azure.Amqp;
 using Microsoft.Azure.Functions.Worker;
@@ -20,7 +21,10 @@ public class Function1
         _logger.LogInformation($"Event Body: {events.Count()}");
         foreach (EventData @event in events)
         {
-            _logger.LogInformation("Event Body: {body}", @event.Body);
+            var data1= Encoding.UTF8.GetString(@event.Data);
+            var data2 = @event.Body.ToString();
+            _logger.LogInformation($"Event Body1: {data1}");
+            _logger.LogInformation($"Event Body2: {data2}");
             _logger.LogInformation("Event Content-Type: {contentType}", @event.ContentType);
         }
         _logger.LogInformation($"Time: {DateTime.Now}");
