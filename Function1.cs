@@ -16,13 +16,15 @@ public class Function1
     }
 
     [Function(nameof(Function1))]
-    public void Run([EventHubTrigger("roberteventhub", Connection = "EventHubConnectionString")] EventData[] events)
+    public void Run([EventHubTrigger("roberteventhub", Connection = "EventHubConnectionString", ConsumerGroup = "azure")] EventData[] events)
     {
-        _logger.LogInformation($"Event Body: {events.Count()}");
+        _logger.LogInformation($"Event counts: {events.Count()}");
         if (events.Count() > 0)
         {
             var data = Encoding.UTF8.GetString(events[0].Data);
-            _logger.LogInformation($"First event in batch: {data} Time: {DateTime.Now}");
+            _logger.LogInformation($"First event in batch: {data}");
+            _logger.LogInformation($"Processed: {DateTime.Now}");
+            _logger.LogInformation("");
         }
 /*        foreach (EventData @event in events)
         {
