@@ -11,7 +11,7 @@ namespace TestAzureFunEventReceiver;
 public class Receiver
 {
     private readonly ILogger<Receiver> _logger;
-    private readonly string dateTimeformat = "dd/MM/yyyy HH:mm:ss";
+    private readonly string dateTimeformat = "yyyy-MM-dd HH:mm:ss.fff";
 
     public Receiver(ILogger<Receiver> logger)
     {
@@ -29,7 +29,7 @@ public class Receiver
             _logger.LogInformation($"First event in batch: {firstEventJSon}");
 
             var delay = GetDelay(now, firstEventJSon);
-            _logger.LogInformation($"Processed: {now.ToString("yyyy-MM-dd HH:mm:ss.fff")}, Delay (ms): {delay.Milliseconds}");
+            _logger.LogInformation($"Processed: {now.ToString(dateTimeformat)}, Delay (ms): {delay.Milliseconds}");
 
             //    "Id":21,"SendTime":"28/08/2025 09:12:41","M
         }
