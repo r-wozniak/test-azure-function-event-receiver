@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 using System.Web;
 using Azure.Messaging.EventHubs;
@@ -10,6 +11,7 @@ namespace TestAzureFunEventReceiver;
 public class Receiver
 {
     private readonly ILogger<Receiver> _logger;
+    private readonly string dateTimeformat = "dd/MM/yyyy HH:mm:ss";
 
     public Receiver(ILogger<Receiver> logger)
     {
@@ -40,23 +42,20 @@ public class Receiver
     }
 
     private TimeSpan GetDelay(DateTime now, string jsonRecord)
-    {    
-/*        int idIndx = jsonRecord.IndexOf("\"Id\":") + 5;
-        int idEndIndx = jsonRecord.IndexOf(",", idIndx);
-        string strId = jsonRecord.Substring(idIndx, idEndIndx - idIndx);
+    {
+        /*        int idIndx = jsonRecord.IndexOf("\"Id\":") + 5;
+                int idEndIndx = jsonRecord.IndexOf(",", idIndx);
+                string strId = jsonRecord.Substring(idIndx, idEndIndx - idIndx);
 
-        int id = int.Parse(strId);*/
+                int id = int.Parse(strId);*/
+        // "28/08/2025 09:12:4
 
         int senddateIndx = jsonRecord.IndexOf("\"SendTime\":\"") + 12;
-        _logger.LogInformation($"si: {senddateIndx}");
         int senddateEndIndx = jsonRecord.IndexOf("\",", senddateIndx);
-        _logger.LogInformation($"sie: {senddateEndIndx}");
         string strSendDate = jsonRecord.Substring(senddateIndx, senddateEndIndx - senddateIndx);
-        _logger.LogInformation($"date: {strSendDate}");
         try
         {
-            DateTime sendDate = DateTime.Parse(strSendDate);
-            _logger.LogInformation($"senddate: {sendDate}");
+            DateTime sendDate = DateTime.ParseExact(strSendDate, dateTimeformat, CultureInfo.InvariantCulture);
             return now - sendDate;
         }
         catch (Exception ex)
