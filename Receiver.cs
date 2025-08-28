@@ -27,6 +27,7 @@ public class Receiver
             _logger.LogInformation($"First event in batch: {firstEventJSon}");
 
             var delay = GetDelay(now, firstEventJSon);
+            _logger.LogInformation($"Delay: {delay.ToString()}");
             _logger.LogInformation($"Processed: {now}, Delay (ms): {delay.Milliseconds}");
 
             //    "Id":21,"SendTime":"28/08/2025 09:12:41","M
