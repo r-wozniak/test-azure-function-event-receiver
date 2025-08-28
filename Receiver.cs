@@ -53,8 +53,16 @@ public class Receiver
         _logger.LogInformation($"sie: {senddateEndIndx}");
         string strSendDate = jsonRecord.Substring(senddateIndx, senddateEndIndx - senddateIndx);
         _logger.LogInformation($"date: {strSendDate}");
-        DateTime sendDate = DateTime.Parse(strSendDate);
-        _logger.LogInformation($"senddate: {sendDate}");
-        return now - sendDate;
+        try
+        {
+            DateTime sendDate = DateTime.Parse(strSendDate);
+            _logger.LogInformation($"senddate: {sendDate}");
+            return now - sendDate;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation(ex.Message);
+        }
+        return new TimeSpan(0, 0, 0, -1, 0);
     }
 }
