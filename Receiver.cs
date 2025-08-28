@@ -29,7 +29,7 @@ public class Receiver
             _logger.LogInformation($"First event in batch: {firstEventJSon}");
 
             var delay = GetDelay(now, firstEventJSon);
-            _logger.LogInformation($"Processed: {now}, Delay (ms): {delay.Milliseconds}");
+            _logger.LogInformation($"Processed: {now.ToString("yyyy-MM-dd HH:mm:ss.fff")}, Delay (ms): {delay.Milliseconds}");
 
             //    "Id":21,"SendTime":"28/08/2025 09:12:41","M
         }
@@ -49,7 +49,7 @@ public class Receiver
                 int id = int.Parse(strId);*/
         // "28/08/2025 09:12:4
 
-        int senddateIndx = jsonRecord.IndexOf("\"SendTime\":\"") + 12;
+        int senddateIndx = jsonRecord.IndexOf("\"SendTime\":\"") + 16;
         int senddateEndIndx = jsonRecord.IndexOf("\",", senddateIndx);
         string strSendDate = jsonRecord.Substring(senddateIndx, senddateEndIndx - senddateIndx);
         try
