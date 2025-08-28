@@ -25,8 +25,10 @@ public class Receiver
         {
             var firstEventJSon = Encoding.UTF8.GetString(events[0].Data);
             _logger.LogInformation($"First event in batch: {firstEventJSon}");
-            _logger.LogInformation($"Processed: {now}, Delay: {GetDelay(now, firstEventJSon)}");
-            _logger.LogInformation("");
+
+            var delay = GetDelay(now, firstEventJSon);
+            _logger.LogInformation($"Processed: {now}, Delay (ms): {delay.Milliseconds}");
+
             //    "Id":21,"SendTime":"28/08/2025 09:12:41","M
         }
 /*        foreach (EventData @event in events)
