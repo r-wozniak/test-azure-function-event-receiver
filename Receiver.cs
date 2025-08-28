@@ -6,16 +6,16 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
 namespace TestAzureFunEventReceiver;
-public class Function1
+public class Receiver
 {
-    private readonly ILogger<Function1> _logger;
+    private readonly ILogger<Receiver> _logger;
 
-    public Function1(ILogger<Function1> logger)
+    public Receiver(ILogger<Receiver> logger)
     {
         _logger = logger;
     }
 
-    [Function(nameof(Function1))]
+    [Function(nameof(Receiver))]
     public void Run([EventHubTrigger("roberteventhub", Connection = "EventHubConnectionString", ConsumerGroup = "azure")] EventData[] events)
     {
         _logger.LogInformation($"Event counts: {events.Count()}");
@@ -23,7 +23,7 @@ public class Function1
         {
             var data = Encoding.UTF8.GetString(events[0].Data);
             _logger.LogInformation($"First event in batch: {data}");
-            _logger.LogInformation($"Processed: {DateTime.Now}");
+            _logger.LogInformation($"Processed: {DateTime.UtcNow}");
             _logger.LogInformation("");
         }
 /*        foreach (EventData @event in events)
