@@ -49,7 +49,7 @@ public class Receiver
                 int id = int.Parse(strId);*/
         // "28/08/2025 09:12:4
 
-        int senddateIndx = jsonRecord.IndexOf("\"SendTime\":\"") + 16;
+        int senddateIndx = jsonRecord.IndexOf("\"SendTime\":\"") + 12;
         int senddateEndIndx = jsonRecord.IndexOf("\",", senddateIndx);
         string strSendDate = jsonRecord.Substring(senddateIndx, senddateEndIndx - senddateIndx);
         try
