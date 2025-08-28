@@ -45,10 +45,13 @@ public class Receiver
         int id = int.Parse(strId);*/
 
         int senddateIndx = jsonRecord.IndexOf("\"SendTime\":\"") + 12;
+        _logger.LogInformation($"si: {senddateIndx}");
         int senddateEndIndx = jsonRecord.IndexOf("\",", senddateIndx);
+        _logger.LogInformation($"sie: {senddateEndIndx}");
         string strSendDate = jsonRecord.Substring(senddateIndx, senddateEndIndx - senddateIndx);
+        _logger.LogInformation($"date: {strSendDate}");
         DateTime sendDate = DateTime.Parse(strSendDate);
-
+        _logger.LogInformation($"senddate: {sendDate}");
         return now - sendDate;
     }
 }
