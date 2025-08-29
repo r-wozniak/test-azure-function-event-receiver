@@ -40,4 +40,4 @@ jobs:
           app-name: 'EventReceiver'
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_02C4144B59354F7A985972E0FBCADEE7 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4CDA1AB001324BEF86C4B273B0E4BE5C }}
